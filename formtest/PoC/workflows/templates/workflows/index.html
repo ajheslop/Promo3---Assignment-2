@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <a href="{% url 'create-workflow' %}">
+<button type="button" class="btn btn-primary btn-lg">Create Workflow</button>
+</a>
+
+
+<a href="{% url 'workflows' %}">
+    <button type="button" class="btn btn-primary btn-lg">Browse Workflow</button>
+    </a>
+
+
+{% endblock %}

@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+{% comment %} <img src="{{ PoC.featured_image.url }}" {% endcomment %}
+  <!-- Main Section -->
+  <main class="singleProject my-md">
+    <div class="container">
+      <div class="layout">
+        <div class="column column--1of3">
+          <h3 class="singleProject__subtitle">Tags</h3>
+          <div class="singleProject__toolStack">
+
+            {% for tag in workflow.tags.all %}
+
+            <span class="tag tag--pill tag--sub tag--lg">
+
+                <span>
+                  {{ tag }}
+
+                </span>
+            </span>
+            {% endfor %}
+            
+
+
+          </div>
+
+          <div class="column column--1of3">
+            <h3 class="singleProject__subtitle">Steps:</h3>
+            <div class="singleProject__toolStack">
+  Please click on each step below to access and upload the relevent documentation.<p>
+    <br>
+              {% for step in workflow.steps.all %}
+  
+              <p>  <span class="tag tag--pill tag--sub tag--lg">
+  
+                 <span>
+                    {{ step }}
+  
+                  </span>
+              </span>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="grid grid--two">
+            <h3 class="singleProject__subtitle">Users to Workflow:</h3>
+
+            {% for profile in profiles %}
+          <div class="column card">
+              <div class="dev">
+                  <a href="{% url 'user-profile' profile.id %}" class="card__body">
+                      <div class="dev__profile">
+                           <img class="avatar avatar--md"  src="{{ profile.profile_image.url }}" alt="image" />
+                          <div class="dev__meta">
+                              <h3>{{profile.name}}</h3>
+                              <h5>{{profile.short_intro|slice:"60"}}</h5>
+                          </div>
+                      </div>
+                     
+                  </a>
+              </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+
+
+
+          <a class="singleProject__liveLink" href="#" target="_blank"><i class="im im-external-link"></i>Source Code
+          </a>
+        </div>
+        <div class="column column--2of3">
+          <img class="singleProject__preview" src="{{ workflow.imageURL }}" alt="portfolio thumbnail" />
+          {% comment %} <a href="profile.html" class="singleProject__developer">{{ worflow.na}}</a> {% endcomment %}
+          <h2 class="singleProject__title">{{ workflow.name}}</h2>
+          <h3 class="singleProject__subtitle">About the Workflow:</h3>
+          <div class="singleProject__info">
+            <p>
+              {{ workflow.description}}
+            <br />
+          
+          </div>
+          
+                
+
+
+          
+
+<div class="grid grid--two">
+                        {% for workflow in profile.workflow_set.all %}
+                        <div class="column">
+                            <div class="card project">
+                                <a href="{% url 'workflow' workflow.id %}" class="project">
+                                    <img class="project__thumbnail" src="{{workflow.featured_image.url}}"
+                                        alt="project thumbnail" />
+                                    <div class="card__body">
+                                        <h3 class="project__title">{{workflow.title}}</h3>
+                                        <p><a class="project__author"
+                                                href="{% url 'user-profile' workflow.owner.id %}">By
+                                                {{workflow.owner.name}}</a>
+                                        </p>
+                                        <p class="workflow--rating">
+                                            <span style="font-weight: bold;">{{workflow.vote_ratio}}%</span> Postitive
+                                            Feedback ({{workflow.vote_total}} Vote{{workflow.vote_total|pluralize:"s"}})
+                                        </p>
+                                        <div class="project__tags">
+
+                                            {% for tag in workflow.tags.all %}
+                                            <span class="tag tag--pill tag--main">
+                                                <small>{{tag}}</small>
+                                            </span>
+                                            {% endfor %}
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+
+
+          <div class="comments">
+            <h3 class="singleProject__subtitle">Feedback</h3>
+            <h5 class="project--rating">
+              36% Postitive Feedback (18 Votes)
+            </h5>
+
+            <form class="form" action="#" method="POST">
+              <!-- Textarea -->
+              <div class="form__field">
+                <label for="formInput#textarea">Comments: </label>
+                <textarea class="input input--textarea" name="message" id="formInput#textarea"
+                  placeholder="Write your comments here..."></textarea>
+              </div>
+              <input class="btn btn--sub btn--lg" type="submit" value="Comments" />
+            </form>
+            <div class="commentList">
+              <div class="comment">
+                <a href="profile.html">
+                  <img class="avatar avatar--md"
+                    src="https://pbs.twimg.com/profile_images/1335382240931368961/b3wSZKj4_400x400.jpg" alt="user" />
+                </a>
+                <div class="comment__details">
+                  <a href="profile.html" class="comment__author">Sulamita Ivanov</a>
+                  <p class="comment__info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit alias numquam perferendis
+                    mollitia minus minima exercitationem possimus ab deserunt qui, soluta iusto doloribus eveniet
+                    similique consequuntur ratione, dignissimos ut magni laborum quo.
+                  </p>
+                </div>
+              </div>
+              <div class="comment">
+                <a href="profile.html">
+                  <img class="avatar avatar--md" src="https://avatars.githubusercontent.com/u/33843378" alt="user" />
+                </a>
+                <div class="comment__details">
+                  <a href="profile.html" class="comment__author">Dennis Ivanov</a>
+                  <p class="comment__info">
+                    Consectetur adipisicing elit. Reprehenderit alias numquam perferendis mollitia minus minima
+                    exercitationem possimus ab deserunt qui, ratione, dignissimos ut magni laborum quo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </main>
+
+
+{% endblock body %}
